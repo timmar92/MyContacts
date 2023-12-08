@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace ContactsLibrary.Services;
 
+/// <summary>
+/// File service class
+/// </summary>
 public class FileService : IFileService
 {
     /// <summary>

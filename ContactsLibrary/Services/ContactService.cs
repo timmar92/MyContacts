@@ -4,17 +4,25 @@ using System.Diagnostics;
 
 namespace ContactsLibrary.Services;
 
+/// <summary>
+/// ContactService class
+/// </summary>
 public class ContactService : IContactservice
 {
-    public List<IContact> _contactList = new List<IContact>();
-    public readonly IFileService _fileService;
-    public readonly string _filePath = @"c:\WIN23\files\mycontacts.json";
+    private List<IContact> _contactList = new List<IContact>();
+    private readonly IFileService _fileService;
+    private readonly string _filePath = @"c:\WIN23\files\mycontacts.json";
 
     public ContactService(IFileService fileService)
     {
         _fileService = fileService;
     }
 
+    /// <summary>
+    /// adds a contact to the list and saves it to a file by calling the FileService class and the SaveContactListToFile method
+    /// </summary>
+    /// <param name="contact">takes a string and converts it to a json file</param>
+    /// <returns>returns true if success, returns false if failed</returns>
     public bool AddContactToList(IContact contact)
     {
         try
@@ -34,6 +42,10 @@ public class ContactService : IContactservice
 
     }
 
+    /// <summary>
+    /// gets all contacts from the list and returns it as an IEnumerable list
+    /// </summary>
+    /// <returns>returns the list if the list is not null, returns null if it is null</returns>
     public IEnumerable<IContact> GetAllContactsFromList()
     {
         try
@@ -49,6 +61,11 @@ public class ContactService : IContactservice
         return null!;
     }
 
+    /// <summary>
+    /// gets a single contact from the list by email address 
+    /// </summary>
+    /// <param name="email">uses the string email</param>
+    /// <returns>returns a single contact if the contact exists, returns null if else</returns>
     public IContact GetSingleContact(string email)
     {
         try
@@ -61,6 +78,11 @@ public class ContactService : IContactservice
         return null!;
     }
 
+    /// <summary>
+    /// removes a contact from the list by email address
+    /// </summary>
+    /// <param name="email">uses the string email</param>
+    /// <returns>removes a single contact by email if contact exists, else returns false</returns>
     public bool RemoveContactFromList(string email)
     {
         try
@@ -79,6 +101,11 @@ public class ContactService : IContactservice
         return false;
     }
 
+    /// <summary>
+    /// updates a contact from the list by email address
+    /// </summary>
+    /// <param name="contact"></param>
+    /// <returns></returns>
     public bool UpdateContactFromList(IContact contact)
     {
         try

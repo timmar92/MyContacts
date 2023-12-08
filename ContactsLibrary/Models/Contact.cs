@@ -2,6 +2,9 @@
 
 namespace ContactsLibrary.Models;
 
+/// <summary>
+/// Contact class
+/// </summary>
 public class Contact : IContact
 {
     public string FirstName { get; set; } = null!;

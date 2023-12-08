@@ -1,14 +1,18 @@
-﻿using ContactsLibrary.Interfaces;
+﻿using ContactConsoleApp.Interfaces;
+using ContactsLibrary.Interfaces;
 using ContactsLibrary.Models;
 using ContactsLibrary.Services;
 
 namespace ContactConsoleApp.Services;
 
-internal class MenuService
+internal class MenuService : IMenuService
 {
-    private static readonly IContactservice _contactService = new ContactService(new FileService());
+    private readonly IContactservice _contactService = new ContactService(new FileService());
 
-    public static void ShowMainMenu()
+    /// <summary>
+    /// shows the main menu
+    /// </summary>
+    public void ShowMainMenu()
     {
         _contactService.GetAllContactsFromList();
         Console.Clear();
@@ -37,7 +41,10 @@ internal class MenuService
         }
     }
 
-    private static void AddContact()
+    /// <summary>
+    /// adds a contact to the list by taking user input and calling the AddContactToList method from the ContactService class
+    /// </summary>
+    public void AddContact()
     {
         IContact contact = new Contact();
 
@@ -61,6 +68,7 @@ internal class MenuService
         contact.Country = Console.ReadLine()!;
 
         _contactService.AddContactToList(contact);
+        Console.WriteLine("");
         Console.WriteLine("Contact added successfully.");
         Console.WriteLine("");
         Console.WriteLine("Press any key to go back to main menu");
@@ -69,7 +77,10 @@ internal class MenuService
         ShowMainMenu();
     }
 
-    private static void ListAllContacts()
+    /// <summary>
+    /// lists all contacts in the list by calling the GetAllContactsFromList method from the ContactService class and asigning a number to each contact
+    /// </summary>
+    public void ListAllContacts()
     {
         Console.Clear();
         var contacts = _contactService.GetAllContactsFromList();
@@ -79,6 +90,7 @@ internal class MenuService
             foreach (var contact in contacts)
             {
                 Console.WriteLine($"{counter}. {contact.FirstName} {contact.LastName} <{contact.Email}>");
+                counter++;
                 Console.WriteLine("");
             }
             Console.WriteLine("please copy the Email of the contact you wish to view later");
@@ -117,7 +129,10 @@ internal class MenuService
         }
     }
 
-    private static void ShowSingleContact()
+    /// <summary>
+    /// shows a single contact by taking user input and calling the GetSingleContact method from the ContactService class
+    /// </summary>
+    public void ShowSingleContact()
     {
         Console.Clear();
         Console.Write("Enter email address: ");
@@ -166,7 +181,10 @@ internal class MenuService
 
     }
 
-    private static void DeleteContact()
+    /// <summary>
+    /// deletes a contact by taking user input and calling the RemoveContactFromList method from the ContactService class
+    /// </summary>
+    public void DeleteContact()
     {
         Console.Clear();
         Console.Write("Enter email address: ");

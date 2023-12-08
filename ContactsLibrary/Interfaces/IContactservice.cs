@@ -1,5 +1,8 @@
 ﻿namespace ContactsLibrary.Interfaces;
 
+/// <summary>
+/// Interface for contact service
+/// </summary>
 public interface IContactservice
 {
     bool AddContactToList(IContact contact);
