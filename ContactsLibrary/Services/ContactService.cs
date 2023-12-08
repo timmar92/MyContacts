@@ -6,9 +6,9 @@ namespace ContactsLibrary.Services;
 
 public class ContactService : IContactservice
 {
-    private List<IContact> _contactList = [];
-    private readonly IFileService _fileService;
-    private readonly string _filePath = @"c:\mycontacts.json";
+    public List<IContact> _contactList = new List<IContact>();
+    public readonly IFileService _fileService;
+    public readonly string _filePath = @"c:\WIN23\files\mycontacts.json";
 
     public ContactService(IFileService fileService)
     {
@@ -23,12 +23,12 @@ public class ContactService : IContactservice
             {
                 _contactList.Add(contact);
 
-                string json = JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All});
+                string json = JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var result = _fileService.SaveContactListToFile(_filePath, json);
                 return result;
             }
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("ContactService - AddContactToList::" + ex.Message); }
         return false;
 
 
@@ -45,7 +45,7 @@ public class ContactService : IContactservice
                 return _contactList;
             }
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("ContactService - GetContactsFromList::" + ex.Message); }
         return null!;
     }
 
@@ -57,7 +57,7 @@ public class ContactService : IContactservice
             var contact = _contactList.FirstOrDefault(x => x.Email == email);
             return contact ??= null!;
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("ContactService - GetSingleContact::" + ex.Message); }
         return null!;
     }
 
@@ -75,7 +75,7 @@ public class ContactService : IContactservice
                 return result;
             }
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("ContactService - RemoveContactFromList::" + ex.Message); }
         return false;
     }
 
@@ -94,7 +94,7 @@ public class ContactService : IContactservice
                 return result;
             }
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("ContactService - UpdateContactFromList::" + ex.Message); }
         return false;
     }
 }

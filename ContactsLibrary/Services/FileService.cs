@@ -17,11 +17,11 @@ public class FileService : IFileService
             if (File.Exists(filePath))
             {
                 using var sr = new StreamReader(filePath);
-                return File.ReadAllText(filePath);
+                return sr.ReadToEnd();
             }
 
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("FileService - GetContactListFromFile::" + ex.Message); }
         return null!;
     }
     /// <summary>
@@ -38,7 +38,7 @@ public class FileService : IFileService
             sw.WriteLine(content);
             return true;
         }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        catch (Exception ex) { Debug.WriteLine("FileService - SaveContactListToFile::" + ex.Message); }
         return false;
     }
 

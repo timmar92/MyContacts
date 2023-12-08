@@ -11,7 +11,7 @@ internal class MenuService
     public static void ShowMainMenu()
     {
         _contactService.GetAllContactsFromList();
-
+        Console.Clear();
         Console.WriteLine("Welcome to the Contact App");
         Console.WriteLine("Please select an option:");
         Console.WriteLine("1. Add a contact");
@@ -41,7 +41,7 @@ internal class MenuService
     {
         IContact contact = new Contact();
 
-
+        Console.Clear();
         Console.Write("Enter first name: ");
         contact.FirstName = Console.ReadLine()!;
         Console.WriteLine("");
@@ -71,8 +71,9 @@ internal class MenuService
 
     private static void ListAllContacts()
     {
+        Console.Clear();
         var contacts = _contactService.GetAllContactsFromList();
-        if (contacts != null)
+        if (contacts != null && contacts.Any())
         {
             int counter = 1;
             foreach (var contact in contacts)
@@ -111,11 +112,14 @@ internal class MenuService
         else
         {
             Console.WriteLine("No contacts found.");
+            Console.WriteLine("Press any key to go back to main menu");
+            ShowMainMenu();
         }
     }
 
     private static void ShowSingleContact()
     {
+        Console.Clear();
         Console.Write("Enter email address: ");
         var email = Console.ReadLine();
         var contact = _contactService.GetSingleContact(email!);
@@ -164,13 +168,23 @@ internal class MenuService
 
     private static void DeleteContact()
     {
+        Console.Clear();
         Console.Write("Enter email address: ");
         var email = Console.ReadLine();
         var contact = _contactService.GetSingleContact(email!);
         if (contact != null)
         {
-            _contactService.RemoveContactFromList(email!);
-            Console.WriteLine("Contact deleted successfully.");
+            Console.WriteLine("Are you sure you want to delete this contact? (y/n)");
+            var confirmation = Console.ReadLine();
+            if (confirmation?.ToLower() == "y")
+            {
+                _contactService.RemoveContactFromList(email!);
+                Console.WriteLine("Contact deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Contact deletion cancelled.");
+            }
             Console.WriteLine("");
             Console.WriteLine("Press any key to go back to main menu");
             Console.ReadKey();
@@ -184,6 +198,5 @@ internal class MenuService
             Console.ReadKey();
             ShowMainMenu();
         }
-
     }
 }
