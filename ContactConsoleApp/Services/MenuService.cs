@@ -17,10 +17,13 @@ internal class MenuService : IMenuService
         _contactService.GetAllContactsFromList();
         Console.Clear();
         Console.WriteLine("Welcome to the Contact App");
+        Console.WriteLine("");
         Console.WriteLine("Please select an option:");
+        Console.WriteLine("");
         Console.WriteLine("1. Add a contact");
         Console.WriteLine("2. List all contacts and view contact information");
         Console.WriteLine("3. Exit");
+        Console.WriteLine("");
         Console.Write("Enter your choice: ");
         var option = Console.ReadLine();
         switch (option)
@@ -35,6 +38,7 @@ internal class MenuService : IMenuService
                 Environment.Exit(0);
                 break;
             default:
+                Console.WriteLine("");
                 Console.WriteLine("Invalid option. Please try again.");
                 ShowMainMenu();
                 break;
@@ -94,11 +98,14 @@ internal class MenuService : IMenuService
                 Console.WriteLine("");
             }
             Console.WriteLine("please copy the Email of the contact you wish to view later");
+            Console.WriteLine("");
             Console.WriteLine("Please select an option:");
+            Console.WriteLine("");
             Console.WriteLine("1. Add a contact");
             Console.WriteLine("2. View a contacts details");
             Console.WriteLine("3. Delete a contact");
             Console.WriteLine("4. Back to main menu");
+            Console.WriteLine("");
             Console.Write("Enter your choice: ");
             var option = Console.ReadLine();
             switch (option)
@@ -140,6 +147,7 @@ internal class MenuService : IMenuService
         var contact = _contactService.GetSingleContact(email!);
         if (contact != null)
         {
+            Console.WriteLine("");
             Console.WriteLine($"First Name: {contact.FirstName}");
             Console.WriteLine($"Last Name: {contact.LastName}");
             Console.WriteLine($"Email: {contact.Email}");
@@ -148,9 +156,11 @@ internal class MenuService : IMenuService
             Console.WriteLine($"Country: {contact.Country}");
             Console.WriteLine("");
             Console.WriteLine("Please select an option:");
+            Console.WriteLine("");
             Console.WriteLine("1. Back to main menu");
             Console.WriteLine("2. List all contacts");
             Console.WriteLine("3. Delete contact");
+            Console.WriteLine("");
             Console.Write("Enter your choice: ");
             var option = Console.ReadLine();
             switch (option)
@@ -192,15 +202,18 @@ internal class MenuService : IMenuService
         var contact = _contactService.GetSingleContact(email!);
         if (contact != null)
         {
+            Console.WriteLine("");
             Console.WriteLine("Are you sure you want to delete this contact? (y/n)");
             var confirmation = Console.ReadLine();
             if (confirmation?.ToLower() == "y")
             {
                 _contactService.RemoveContactFromList(email!);
+                Console.WriteLine("");
                 Console.WriteLine("Contact deleted successfully.");
             }
             else
             {
+                Console.WriteLine("");
                 Console.WriteLine("Contact deletion cancelled.");
             }
             Console.WriteLine("");
