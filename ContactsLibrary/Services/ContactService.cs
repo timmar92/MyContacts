@@ -1,5 +1,6 @@
 ﻿using ContactsLibrary.Interfaces;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace ContactsLibrary.Services;
@@ -9,7 +10,7 @@ namespace ContactsLibrary.Services;
 /// </summary>
 public class ContactService : IContactservice
 {
-    private List<IContact> _contactList = new List<IContact>();
+    private ObservableCollection<IContact> _contactList = [];
     private readonly IFileService _fileService;
     private readonly string _filePath = @"c:\WIN23\files\mycontacts.json";
 
@@ -53,7 +54,7 @@ public class ContactService : IContactservice
             var content = _fileService.GetContactListFromFile(_filePath);
             if (!string.IsNullOrEmpty(content))
             {
-                _contactList = JsonConvert.DeserializeObject<List<IContact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
+                _contactList = JsonConvert.DeserializeObject<ObservableCollection<IContact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
                 return _contactList;
             }
         }

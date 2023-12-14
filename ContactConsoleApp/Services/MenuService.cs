@@ -65,7 +65,7 @@ internal class MenuService : IMenuService
         Console.Write("Enter phone number: ");
         contact.PhoneNumber = Console.ReadLine()!;
         Console.WriteLine("");
-        Console.Write("Enter city: ");
+        Console.Write("Enter city of residence: ");
         contact.City = Console.ReadLine()!;
         Console.WriteLine("");
         Console.Write("Enter country: ");
