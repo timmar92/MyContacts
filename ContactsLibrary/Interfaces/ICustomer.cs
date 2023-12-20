@@ -4,8 +4,9 @@
 /// <summary>
 /// Interface for contact
 /// </summary>
-public interface IContact
+public interface ICustomer
 {
+    Guid Id { get; set; }
     string FirstName { get; set; }
     string LastName { get; set; }
     string PhoneNumber { get; set; }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContactMauiApp.Pages.EditContactPage"
+             Title="Edit Contact">
+    <ScrollView>
+        <Grid RowDefinitions="auto, *" Margin="20">
+            <VerticalStackLayout Grid.Row="0">
+                <Label Text="Fill in the requred fields and click Add" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,30" />
+
+                <Label Text="First Name" Margin="10,0,0,10" />
+                <Entry Text="{Binding Contact.FirstName}" Margin="0,0,0,20" />
+
+                <Label Text="Last Name" Margin="10,0,0,10" />
+                <Entry Text="{Binding Contact.LastName}" Margin="0,0,0,20" />
+
+                <Label Text="Email adress" Margin="10,0,0,10" />
+                <Entry Text="{Binding Contact.Email}" Margin="0,0,0,20" />
+
+                <Label Text="Phone number" Margin="10,0,0,10" />
+                <Entry Text="{Binding Contact.PhoneNumber}" Margin="0,0,0,20" />
+
+                <Label Text="Enter city of residence" Margin="10,0,0,10" />
+                <Entry Text="{Binding Contact.City}" Margin="0,0,0,20" />
+
+                <Label Text="Enter your country" Margin="10,0,0,10" />
+                <Entry Text="{Binding Contact.Country}" Margin="0,0,0,50" />
+
+                <Button Text="Add Contact" Command="{Binding UpdateCommand}" Margin="20,0,30,20" />
+
+                <Button Grid.Column="1" Text="View all contacts" Margin="20,0,30,0" Command="{Binding NavigateToContactsPageCommand}" />
+                <!--<Button Grid.Column="1" Text="Back to main page" Margin="20,20,30,0" Command="{Binding BackToMainPageCommand}" />-->
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

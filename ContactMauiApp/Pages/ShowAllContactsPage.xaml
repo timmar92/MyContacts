@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContactMauiApp.Pages.ShowAllContactsPage"
+             
+             xmlns:interfaces="clr-namespace:ContactsLibrary.Interfaces;assembly=ContactsLibrary"
+             xmlns:models="clr-namespace:ContactsLibrary.Models;assembly=ContactsLibrary"
+             xmlns:viewmodels="clr-namespace:ContactMauiApp.ViewModels"
+             x:DataType="{x:Type viewmodels:ShowAllContactsViewModel}"
+             
+             Title="ShowAllContactsPage">
+
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, *, *" Margin="20">
+            <VerticalStackLayout Grid.Row="0">
+                <Label Text="Here you can view all your contacts" VerticalOptions="Center" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding AllContactsList}" Margin="0, 0, 0, 0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type interfaces:ICustomer}">
+                        <Frame Padding="5" BackgroundColor="Transparent" BorderColor="White" CornerRadius="0">
+                            <Grid ColumnDefinitions="*, auto">
+                                <VerticalStackLayout Grid.Column="0" Margin="20, 10, 0, 0">
+
+                                    <HorizontalStackLayout>
+                                        
+                                        <Label Text="{Binding FirstName}" FontSize="16" TextColor="White" FontAttributes="Bold" Margin="0, 0, 10, 0" />
+                                        <Label Text="{Binding LastName}" FontSize="16" TextColor="White" FontAttributes="Bold" />
+                                        
+
+                                        
+                                    </HorizontalStackLayout>
+
+                                    <Label Text="{Binding Email}" FontSize="13" TextColor="LightGray" FontAttributes="Italic" Margin="0, 10, 0, 0" />
+
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1" Text="Details" 
+                                        Command="{Binding Path=NavigateToDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ShowAllContactsViewModel}}}" 
+                                        CommandParameter="{Binding Email}" Margin="0,15,30,15" />
+
+                                <!--<Button Grid.Column="1" Text="Delete" Command="{Binding Path=DeleteContactCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ShowAllContactsViewModel}}}" CommandParameter="{Binding Email}" Margin="0,15,30,15" />-->
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

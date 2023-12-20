@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ContactMauiApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ContactMauiApp"
+    
+    xmlns:pages="clr-namespace:ContactMauiApp.Pages"
+    
+    Shell.FlyoutBehavior="Disabled"
+    Title="Contact Maui App">
+
+    <ShellContent Title="Welcome" Route="WelcomePage" ContentTemplate="{DataTemplate pages:WelcomePage}" />
+    <ShellContent Title="Contact" Route="ContactPage" ContentTemplate="{DataTemplate pages:AddContactPage}" />
+    <ShellContent Title="Contact List" Route="ContactListPage" ContentTemplate="{DataTemplate pages:ShowAllContactsPage}" />
+    <ShellContent Title="Contact Detail" Route="ContactDetailPage" ContentTemplate="{DataTemplate pages:ContactDetailsPage}" />
+    <ShellContent Title="Contact Edit" Route="ContactEditPage" ContentTemplate="{DataTemplate pages:EditContactPage}" />
+
+</Shell>

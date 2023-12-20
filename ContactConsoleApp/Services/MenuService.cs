@@ -50,7 +50,7 @@ internal class MenuService : IMenuService
     /// </summary>
     public void AddContact()
     {
-        IContact contact = new Contact();
+        ICustomer contact = new Customer();
 
         Console.Clear();
         Console.Write("Enter first name: ");

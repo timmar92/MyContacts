@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:viewmodels="clr-namespace:ContactMauiApp.ViewModels"
+             x:DataType="{x:Type viewmodels:ContactDetailsViewModel}"
+             
+             x:Class="ContactMauiApp.Pages.ContactDetailsPage"
+             Title="Contact Details">
+    <VerticalStackLayout Margin="20">
+        <Label Text="{Binding Contact.FirstName}" />
+        <Label Text="{Binding Contact.LastName}" />
+        <Label Text="{Binding Contact.PhoneNumber}" />
+        <Label Text="{Binding Contact.Email}" />
+        <Label Text="{Binding Contact.City}" />
+        <Label Text="{Binding Contact.Country}" />
+    </VerticalStackLayout>
+</ContentPage>

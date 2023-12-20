@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContactMauiApp.Pages.WelcomePage"
+             
+             xmlns:viewmodels="clr-namespace:ContactMauiApp.ViewModels"
+             x:DataType="{x:Type viewmodels:WelcomeViewModel}"
+             
+             Title="Start Page">
+    <VerticalStackLayout>
+        <Grid RowDefinitions="*, auto, auto" Margin="20">
+            
+            <Label Grid.Row="0" Text="Welcome to my contacts app!" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="1" Text="Please choose an option below" VerticalOptions="Center" HorizontalOptions="Center" />
+            
+            <Grid Grid.Row="2" ColumnDefinitions="*, *" Margin="0,30,0,0">
+                <Button Grid.Column="0" Text="Add a contact" Margin="30,0,20,0" Command="{Binding NavigateToAddContactPageCommand}" />
+                <Button Grid.Column="1" Text="View all contacts" Margin="20,0,30,0" Command="{Binding NavigateToContactsPageCommand}" />
+            </Grid>
+            
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

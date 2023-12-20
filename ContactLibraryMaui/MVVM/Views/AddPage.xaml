@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:viewmodels="clr-namespace:ContactLibraryMaui.MVVM.ViewModels"
+             x:DataType="{x:Type viewmodels:AddViewModel}"
+             
+             x:Class="ContactLibraryMaui.MVVM.Views.AddPage"
+             Title="Add New Contact">
+    
+    
+    <VerticalStackLayout Margin="20">
+        <Label Text="First Name"/>
+        <Entry Text="{Binding Customer.FirstName}" Margin="0,10,0,0" />
+
+        <Label Text="Last Name"/>
+        <Entry Text="{Binding Customer.LastName}" Margin="0,10,0,0" />
+
+        <Label Text="Email"/>
+        <Entry Text="{Binding Customer.Email}" Margin="0,10,0,0" />
+
+        <Label Text="Phone Number"/>
+        <Entry Text="{Binding Customer.PhoneNumber}" Margin="0,10,0,0" />
+
+        <Label Text="City Of Residence"/>
+        <Entry Text="{Binding Customer.City}" Margin="0,10,0,0" />
+
+        <Label Text="Country"/>
+        <Entry Text="{Binding Customer.Country}" Margin="0,10,0,0" />
+
+        <Button Text="Add Contact" Command="{Binding AddCommand}" Margin="0,20,0,0" />
+    </VerticalStackLayout>
+    
+    
+</ContentPage>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:viewmodels="clr-namespace:ContactLibraryMaui.MVVM.ViewModels"
+             xmlns:models="clr-namespace:ContactsLibrary.Models;assembly=ContactsLibrary"
+             xmlns:interfaces="clr-namespace:ContactsLibrary.Interfaces;assembly=ContactsLibrary"
+             x:DataType="{x:Type viewmodels:ListViewModel}"
+             
+             x:Class="ContactLibraryMaui.MVVM.Views.ListPage"
+             Title="List Of Contacts">
+    
+    
+    <Grid RowDefinitions="auto, *" Margin="20">
+
+        <Button Grid.Row="0" Text="Add New Item"  
+            Command="{Binding NavigateToAddCommand}" Margin="0,0,0,20" />
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding MauiList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="interfaces:ICustomer">
+                    <Frame BackgroundColor="Transparent" BorderColor="White" Padding="10">
+                        <Grid ColumnDefinitions="*, auto">
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout Padding="5">
+                                    <Label Grid.Column="0" Text="{Binding FirstName}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="16" Margin="0,0,10,0" />
+                                    <Label Grid.Column="0" Text="{Binding LastName}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="16" />
+                                </HorizontalStackLayout>
+                                <Label Grid.Column="0" Text="{Binding Email}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="13" FontAttributes="Italic" Padding="5" />
+                            </VerticalStackLayout>
+
+
+                            <HorizontalStackLayout Grid.Column="1">
+                                <Button Text="DETAILS" 
+                                    CommandParameter="{Binding .}" 
+                                    Command="{Binding Path=NavigateToDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ListViewModel}}}" />
+
+                                <!--<Button Text="DELETE" 
+                                    CommandParameter="{Binding .}" 
+                                    Command="{Binding Path=RemoveCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ListViewModel}}}" />-->
+                            </HorizontalStackLayout>
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

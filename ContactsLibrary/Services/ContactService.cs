@@ -10,10 +10,17 @@ namespace ContactsLibrary.Services;
 /// </summary>
 public class ContactService : IContactservice
 {
-    private ObservableCollection<IContact> _contactList = [];
+
+    public ObservableCollection<ICustomer> _contactList = [];
     private readonly IFileService _fileService;
     private readonly string _filePath = @"c:\WIN23\files\mycontacts.json";
 
+    public event EventHandler? ContactListUpdated;
+
+    /// <summary>
+    /// ContactService constructor
+    /// </summary>
+    /// <param name="fileService"></param>
     public ContactService(IFileService fileService)
     {
         _fileService = fileService;
@@ -22,18 +29,21 @@ public class ContactService : IContactservice
     /// <summary>
     /// adds a contact to the list and saves it to a file by calling the FileService class and the SaveContactListToFile method
     /// </summary>
-    /// <param name="contact">takes a string and converts it to a json file</param>
+    /// <param name="customer">takes a string and converts it to a json file</param>
     /// <returns>returns true if success, returns false if failed</returns>
-    public bool AddContactToList(IContact contact)
+    public bool AddContactToList(ICustomer customer)
     {
         try
         {
-            if (!_contactList.Any(x => x.Email == contact.Email))
+            if (!_contactList.Any(x => x.Email == customer.Email))
             {
-                _contactList.Add(contact);
+                _contactList.Add(customer);
+
 
                 string json = JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var result = _fileService.SaveContactListToFile(_filePath, json);
+
+                ContactListUpdated?.Invoke(this, EventArgs.Empty);
                 return result;
             }
         }
@@ -47,19 +57,23 @@ public class ContactService : IContactservice
     /// gets all contacts from the list and returns it as an IEnumerable list
     /// </summary>
     /// <returns>returns the list if the list is not null, returns null if it is null</returns>
-    public IEnumerable<IContact> GetAllContactsFromList()
+    public IEnumerable<ICustomer> GetAllContactsFromList()
     {
         try
         {
             var content = _fileService.GetContactListFromFile(_filePath);
             if (!string.IsNullOrEmpty(content))
             {
-                _contactList = JsonConvert.DeserializeObject<ObservableCollection<IContact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
+                _contactList = JsonConvert.DeserializeObject<ObservableCollection<ICustomer>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
                 return _contactList;
             }
         }
-        catch (Exception ex) { Debug.WriteLine("ContactService - GetContactsFromList::" + ex.Message); }
-        return null!;
+        catch (Exception ex)
+        {
+            Debug.WriteLine("ContactService - GetContactsFromList::" + ex.Message);
+            _contactList = new ObservableCollection<ICustomer>();
+        }
+        return _contactList;
     }
 
     /// <summary>
@@ -67,7 +81,7 @@ public class ContactService : IContactservice
     /// </summary>
     /// <param name="email">uses the string email</param>
     /// <returns>returns a single contact if the contact exists, returns null if else</returns>
-    public IContact GetSingleContact(string email)
+    public ICustomer GetSingleContact(string email)
     {
         try
         {
@@ -93,8 +107,11 @@ public class ContactService : IContactservice
             if (contactRemove != null)
             {
                 _contactList.Remove(contactRemove);
+
                 string json = JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var result = _fileService.SaveContactListToFile(_filePath, json);
+
+                ContactListUpdated?.Invoke(this, EventArgs.Empty);
                 return result;
             }
         }
@@ -105,20 +122,22 @@ public class ContactService : IContactservice
     /// <summary>
     /// updates a contact from the list by email address
     /// </summary>
-    /// <param name="contact"></param>
+    /// <param name="customer"></param>
     /// <returns></returns>
-    public bool UpdateContactFromList(IContact contact)
+    public bool UpdateContactFromList(ICustomer customer)
     {
         try
         {
             GetAllContactsFromList();
-            var contactUpdate = _contactList.FirstOrDefault(x => x.Email == contact.Email);
-            if (contactUpdate != null)
+            var contactIndex = _contactList.IndexOf(_contactList.FirstOrDefault(x => x.Id == customer.Id)!);
+            if (contactIndex != -1)
             {
-                _contactList.Remove(contactUpdate);
-                _contactList.Add(contact);
+                _contactList[contactIndex] = customer;
+
                 string json = JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var result = _fileService.SaveContactListToFile(_filePath, json);
+
+                ContactListUpdated?.Invoke(this, EventArgs.Empty);
                 return result;
             }
         }
