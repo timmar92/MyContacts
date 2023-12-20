@@ -21,7 +21,10 @@ public partial class DetailsViewModel : ObservableObject, IQueryAttributable
 
     }
 
-
+    /// <summary>
+    /// creates a Contact object and asigns it to ICustomer
+    /// </summary>
+    /// <param name="query"></param>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
 
@@ -30,7 +33,10 @@ public partial class DetailsViewModel : ObservableObject, IQueryAttributable
     }
 
 
-
+    /// <summary>
+    /// deletes the selected contact from the list and navigates back to the ListPage
+    /// </summary>
+    /// <returns></returns>
     [RelayCommand]
     private async Task Delete()
     {
@@ -42,7 +48,10 @@ public partial class DetailsViewModel : ObservableObject, IQueryAttributable
     }
 
 
-
+    /// <summary>
+    /// navigates back to the ListPage
+    /// </summary>
+    /// <returns></returns>
     [RelayCommand]
     private async Task NavigateToList()
     {
@@ -50,7 +59,10 @@ public partial class DetailsViewModel : ObservableObject, IQueryAttributable
     }
 
 
-
+    /// <summary>
+    /// navigates to the EditPage and sends the selected contact as a parameter
+    /// </summary>
+    /// <returns></returns>
     [RelayCommand]
     private async Task NavigateToEdit()
     {

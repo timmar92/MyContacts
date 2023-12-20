@@ -19,6 +19,11 @@ public partial class AddViewModel : ObservableObject
         _contactService = contactService;
     }
 
+
+    /// <summary>
+    /// adds a new contact to the list and navigates back to the ListPage
+    /// </summary>
+    /// <returns>returns true if success, returns false if failed</returns>
     [RelayCommand]
     private async Task Add()
     {
