@@ -44,7 +44,7 @@ public class ContactService : IContactservice
                 var result = _fileService.SaveContactListToFile(_filePath, json);
 
                 ContactListUpdated?.Invoke(this, EventArgs.Empty);
-                return result;
+                return true;
             }
         }
         catch (Exception ex) { Debug.WriteLine("ContactService - AddContactToList::" + ex.Message); }
