@@ -12,7 +12,7 @@ public partial class ListViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<ICustomer> _mauiList = [];
 
->
+
     public ListViewModel(IContactservice contactService)
     {
         _contactService = contactService;
